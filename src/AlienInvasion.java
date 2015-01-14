@@ -43,7 +43,7 @@ public class AlienInvasion {
         public City(String line) {
             String[] elements = line.split(" ");
             name = elements[0];
-            for (int i = 1; i < elements.length; ++i) {
+            for(int i = 1; i < elements.length; ++i) {
                 addToNeighbour(elements[i]);
             }
             cityMap.put(name, this);
@@ -57,12 +57,12 @@ public class AlienInvasion {
         // This method returns a random neighbour of this city, if no neighbours
         // present, it will return itself
         public String getRandomNeighbour() {
-            while (!neighbours.isEmpty()) {
+            while(!neighbours.isEmpty()) {
                 Set<String> keySet = neighbours.keySet();
                 List<String> shuffledNeighbours = shuffleCollection(keySet);
                 Iterator<String> it = shuffledNeighbours.iterator();
                 String n = it.next();
-                if (!cityMap.containsKey(n)) {
+                if(!cityMap.containsKey(n)) {
                     neighbours.remove(n);
                 } else {
                     return n;
@@ -72,7 +72,7 @@ public class AlienInvasion {
         }
 
         private void getDestroyed() {
-            for (Alien a : aliens) {
+            for(Alien a : aliens) {
                 aliensTable.remove(a);
             }
         }
@@ -80,10 +80,10 @@ public class AlienInvasion {
         // This method should be called at the end of each iteration of
         // alien movement
         public boolean checkIfShouldDestroy() {
-            if (aliens.size() > 1) {
-                String toPrint = this.name + " has been destroyed by: ";
+            if(aliens.size() > 1) {
+                String toPrint = this.name+" has been destroyed by: ";
                 for(Alien a : aliens) {
-                    toPrint += "alien " + a.getName() + ", ";
+                    toPrint += "alien "+a.getName()+", ";
                 }
                 System.out.println(toPrint);
                 getDestroyed();
@@ -108,12 +108,12 @@ public class AlienInvasion {
         public String print() {
             String result = "";
             result += this.name;
-            for (Map.Entry<String, String> e : neighbours.entrySet()) {
+            for(Map.Entry<String, String> e : neighbours.entrySet()) {
                 // Add the neighbours that are not destroyed to the output
                 // Since the city might still have a removed city in its neighbours,
                 // we just need to check if we can still find the neighbour in cityMap
-                if (cityMap.containsKey(e.getKey())) {
-                    result += " " + e.getValue() + "=" + e.getKey();
+                if(cityMap.containsKey(e.getKey())) {
+                    result += " "+e.getValue()+"="+e.getKey();
                 }
             }
             return result;
@@ -122,7 +122,7 @@ public class AlienInvasion {
 
     public static <T> List<T> shuffleCollection(Collection<T> c) {
         List<T> toShuffle = new LinkedList<T>();
-        for (T t : c) {
+        for(T t : c) {
             toShuffle.add(t);
         }
         Collections.shuffle(toShuffle);
@@ -130,8 +130,7 @@ public class AlienInvasion {
     }
 
     public static void printCities() {
-        String line;
-        for (City c : cityMap.values()) {
+        for(City c : cityMap.values()) {
             System.out.println(c.print());
         }
     }
@@ -140,7 +139,7 @@ public class AlienInvasion {
         BufferedReader br = new BufferedReader(new FileReader("world_map_small.txt"));
         try {
             String line = br.readLine();
-            while (line != null) {
+            while(line != null) {
                 // This method will also add itself to the cityMap
                 new City(line);
                 line = br.readLine();
@@ -155,14 +154,14 @@ public class AlienInvasion {
         // Here I assume that the number aliens will never be more than the number of cities
         int N = Integer.valueOf(args[0]);
         Iterator<City> it = shuffled.iterator();
-        for (int i = 0; i < N; ++i) {
+        for(int i = 0; i < N; ++i) {
             City city = it.next();
             aliensTable.add(new Alien(city, i));
         }
 
         int iterations = 0;
-        while (!aliensTable.isEmpty() && iterations < MAX_ITERATION) {
-            for (Alien a : aliensTable) {
+        while(!aliensTable.isEmpty() && iterations < MAX_ITERATION) {
+            for(Alien a : aliensTable) {
                 City initCity = a.getCity();
                 initCity.removeAlien(a);
                 City nextCity = cityMap.get(initCity.getRandomNeighbour());
@@ -170,13 +169,13 @@ public class AlienInvasion {
                 a.setCity(nextCity);
             }
             List<String> toRemove = new LinkedList<String>();
-            for (City city : cityMap.values()) {
-                if (city.checkIfShouldDestroy()) {
+            for(City city : cityMap.values()) {
+                if(city.checkIfShouldDestroy()) {
                     toRemove.add(city.getName());
                 }
             }
 
-            for (String city : toRemove) {
+            for(String city : toRemove) {
                 cityMap.remove(city);
             }
             ++iterations;
