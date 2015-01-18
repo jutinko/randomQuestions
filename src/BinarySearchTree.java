@@ -23,10 +23,6 @@ public class BinarySearchTree {
             return right;
         }
 
-        public void setData(int data) {
-            this.data = data;
-        }
-
         public void setLeft(Node left) {
             this.left = left;
         }
@@ -73,22 +69,24 @@ public class BinarySearchTree {
     // addNode iteratively, root cannot be null
     private static void addNodeIter(int n, Node root) {
         Node curr = root;
-        while(true) {
-            if (curr.getData() == n) {
+        Node parent = root;
+        int currData;
+        while(curr != null) {
+            parent = curr;
+            currData = curr.getData();
+            if(currData == n) {
                 return;
-            } else if(curr.getData() > n) {
-                if(curr.getLeft() == null) {
-                    curr.setLeft(new Node(n));
-                    return;
-                }
+            } else if(currData > n) {
                 curr = curr.getLeft();
             } else {
-                if(curr.getRight() == null) {
-                    curr.setRight(new Node(n));
-                    return;
-                }
                 curr = curr.getRight();
             }
+        }
+        Node newNode = new Node(n);
+        if(parent.getData() > n) {
+            parent.setLeft(newNode);
+        } else {
+            parent.setRight(newNode);
         }
     }
 
@@ -117,6 +115,6 @@ public class BinarySearchTree {
     public static void main(String[] args) {
         int A[] = {5, 8, 3, 1, 6, 4, 7};
         BinarySearchTree t = treeFromArray(A);
-        System.out.println(t.findWithinRange(4));
+        System.out.println(t.findWithinRange(14));
     }
 }

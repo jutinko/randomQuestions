@@ -6,7 +6,7 @@ import java.util.Stack;
  */
 public class MyQueue {
     Stack<Object> forPush = new Stack<Object>();
-    Stack forPop = new Stack();
+    Stack<Object> forPop = new Stack<Object>();
 
     public void push(Object o) {
         forPush.push(o);

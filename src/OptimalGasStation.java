@@ -2,6 +2,8 @@ import java.util.*;
 
 /**
  * Created by jutinko on 16/01/15.
+ * Graph problem Felix got at google onsite interview, the optimal solution
+ * required using breadth first search on all the spaceships parallely!
  */
 public class OptimalGasStation {
     static class Node {
@@ -134,7 +136,7 @@ public class OptimalGasStation {
         if(node.seenBy.size() >= total) {
             int optimal = 0;
             for(Node n : node.seenBy.keySet()) {
-                System.out.println(n.getX() + " " + n.getY());
+                System.out.println(n.getX()+" "+n.getY());
             }
             for(Integer i : node.seenBy.values()) {
                 optimal += i;
@@ -156,6 +158,6 @@ public class OptimalGasStation {
         spaceShips.add(new Node(1, 3));
         spaceShips.add(new Node(3, 0));
         spaceShips.add(new Node(0, 0));
-        findOptimalLocation(A, spaceShips);
+        OptimalGasStation.findOptimalLocation(A, spaceShips);
     }
 }

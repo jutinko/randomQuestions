@@ -1,6 +1,6 @@
 /**
  * Created by jutinko on 14/01/15.
- * Simplified hashtable from http://www.algolist.net/Data_structures/Hash_table/Simple_example
+ * Simplified hashTable from http://www.algolist.net/Data_structures/Hash_table/Simple_example
  */
 public class MyHashTable {
     static class MyHashMapEntry {

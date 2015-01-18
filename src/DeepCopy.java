@@ -1,11 +1,8 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by jutinko on 07/01/15.
- * Recursive deep copy implementation on a toy example
+ * Recursive, iterative deep copy's implementation on a toy example
  */
 public class DeepCopy {
 
@@ -16,7 +13,7 @@ public class DeepCopy {
             return null;
         }
         Map<DeepCopy, DeepCopy> table = new HashMap<DeepCopy, DeepCopy>();
-        return copyHelper(from, table);
+        return copyHelperIter(from, table);
     }
 
     private static DeepCopy copyHelper(DeepCopy from, Map<DeepCopy, DeepCopy> table) {
@@ -40,6 +37,30 @@ public class DeepCopy {
         }
     }
 
+    private static DeepCopy copyHelperIter(DeepCopy from, Map<DeepCopy, DeepCopy> table) {
+        DeepCopy result = new DeepCopy();
+        table.put(from, result);
+        Deque<DeepCopy> myQ = new LinkedList<DeepCopy>();
+        myQ.add(from);
+        DeepCopy curr, copy;
+        while(!myQ.isEmpty()) {
+            curr = myQ.pollFirst();
+            copy = table.get(curr);
+            DeepCopy child;
+            for(DeepCopy n : curr.getNodes()) {
+                if(!table.containsKey(n)) {
+                    child = new DeepCopy();
+                    table.put(n, child);
+                    myQ.add(n);
+                } else {
+                    child = table.get(n);
+                }
+                copy.addNode(child);
+            }
+        }
+        return result;
+    }
+
     public List<DeepCopy> getNodes() {
         return nodes;
     }
@@ -61,9 +82,7 @@ public class DeepCopy {
         c.addNode(b);
         c.addNode(d);
         d.addNode(c);
-        d.addNode(b);
 
         copy(a);
-
     }
 }

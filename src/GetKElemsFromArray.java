@@ -14,9 +14,9 @@ public class GetKElemsFromArray {
         for(int i = 0; i < k; ++i) {
             int curr = random.nextInt(size);
             int currInt = A[curr];
-            result.add(currInt);
             A[curr] = A[size-1];
             A[size-1] = currInt;
+            result.add(currInt);
             --size;
         }
         return result;

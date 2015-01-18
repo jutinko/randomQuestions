@@ -46,8 +46,8 @@ public class FindPerimeterBFS {
             while(!myQ.isEmpty()) {
                 curr = myQ.pollFirst();
                 System.out.println(curr.getX() + " and " + curr.getY());
-                if(!seen[curr.getX()][curr.getY()]) {
-                    seen[curr.getX()][curr.getY()] = true;
+                if(!seen[curr.getY()][curr.getX()]) {
+                    seen[curr.getY()][curr.getX()] = true;
                     if(curr.getX()-1 >= 0) {
                         newX = curr.getX()-1;
                         newY = curr.getY();
@@ -84,25 +84,25 @@ public class FindPerimeterBFS {
         }
     }
 
-    private static int getNumberNeighbours(boolean seen[][], int x, int y) {
+    private static int getNumberNeighbours(boolean seen[][], int y, int x) {
         int result = 4;
         if(x-1 >= 0) {
-            if(seen[x-1][y]) {
+            if(seen[y][x-1]) {
                 --result;
             }
         }
         if(x+1 < seen.length) {
-            if(seen[x+1][y]) {
+            if(seen[y][x+1]) {
                 --result;
             }
         }
         if(y-1 >= 0) {
-            if(seen[x][y-1]) {
+            if(seen[y-1][x]) {
                 --result;
             }
         }
         if(y+1 < seen[0].length) {
-            if(seen[x][y+1]) {
+            if(seen[y+1][x]) {
                 --result;
             }
         }
@@ -110,8 +110,8 @@ public class FindPerimeterBFS {
     }
 
     private static void checkAndMark(int A[][], Deque<Node> myQ, int newX, int newY) {
-        if(A[newX][newY] == 1) {
-            myQ.add(new Node(newX, newY));
+        if(A[newY][newX] == 1) {
+            myQ.add(new Node(newY, newX));
         }
     }
 
@@ -129,7 +129,7 @@ public class FindPerimeterBFS {
     public static void main(String[] args) {
         int A[][] = {
                 {0, 1, 1, 1},
-                {0, 1, 1, 1},
+                {0, 1, 0, 1},
                 {0, 1, 1, 1},
                 {0, 0, 0, 0}};
         System.out.println(getPerimeter(A));

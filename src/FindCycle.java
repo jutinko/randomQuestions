@@ -9,14 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class FindCycle {
-//    public static void getCycle(String line) {
-//        String[] numbersInString = line.split(" ");
-//        List<Integer> numbers = new LinkedList<Integer>();
-//        for(String s : numbersInString) {
-//            numbers.add(Integer.parseInt(s));
-//        }
-//        getCycleHelper((Integer[])numbers.toArray());
-//    }
 
     private static void getCycleHelper(int numbers[]) {
         Map<Integer, Set<Integer>> numberPositionMap = new HashMap<Integer, Set<Integer>>();
@@ -57,12 +49,6 @@ public class FindCycle {
     }
 
     public static void main(String[] args) throws IOException {
-//        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-//        String s;
-//        while ((s = in.readLine()) != null) {
-//            getCycle(s);
-//            System.out.println(s);
-//        }
         int A[] = {6, 3 ,2 ,6, 3 ,3, 6, 3, 2, 6, 3, 3, 6, 3, 3};
         getCycleHelper(A);
     }

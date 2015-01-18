@@ -15,7 +15,7 @@ public class P4dot4 {
         Stack<MyTreeNode> stack = new Stack<MyTreeNode>();
         stack.push(t);
 
-        while (!list.isEmpty()) {
+        while (true) {
             list = new LinkedList<MyTreeNode>();
             MyTreeNode n;
             while (!stack.isEmpty()) {
@@ -27,8 +27,12 @@ public class P4dot4 {
                     list.add(n.getRight());
                 }
             }
-            stack.addAll(list);
-            result.add(list);
+            if(list.isEmpty()) {
+                break;
+            } else {
+                stack.addAll(list);
+                result.add(list);
+            }
         }
         return result;
     }

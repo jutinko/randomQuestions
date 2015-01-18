@@ -25,13 +25,11 @@ public class MyStack {
         return null;
     }
 
-
     void push(Object o) {
         Node newNode = new Node(o);
         newNode.next = top;
         this.top = newNode;
     }
-
 
     public static void main(String args[]) {
         MyStack myMyStack = new MyStack();

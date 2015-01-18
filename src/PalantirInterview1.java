@@ -10,8 +10,9 @@ import java.util.Map;
  */
 
 public class PalantirInterview1 {
-    /** This is the solution proposed by Felix, using buckets to store the seen elems,
-     *  and using the nearby buckets to check if there is a duplicate
+    /**
+     * This is the solution proposed by Felix, using buckets to store the seen elems,
+     * and using the nearby buckets to check if there is a duplicate
      */
     public static boolean findDuplicate(int A[], int k, int d) {
         Map<Integer, Integer> buckets = new HashMap<Integer, Integer>();
@@ -30,13 +31,13 @@ public class PalantirInterview1 {
                 int neighbour;
                 if(buckets.containsKey(leftNeighbour)) {
                     neighbour = buckets.get(leftNeighbour);
-                    if(curr - neighbour <= d) {
+                    if(curr-neighbour <= d) {
                         return true;
                     }
                 }
                 if(buckets.containsKey(rightNeighbour)) {
                     neighbour = buckets.get(rightNeighbour);
-                    if(neighbour - curr <= d) {
+                    if(neighbour-curr <= d) {
                         return true;
                     }
                 }

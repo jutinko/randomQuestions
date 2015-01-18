@@ -25,7 +25,7 @@ public class ExecutorDemo {
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(10);
-        Runnable worker;
+        MyThread worker;
         for(int i = 0; i < 500; ++i) {
             worker = new MyThread(10000000L+i);
             executor.submit(worker);
